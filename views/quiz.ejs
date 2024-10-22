@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Application</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="/js/script.js" defer></script>
+</head>
+<body>
+    <div class="container quiz-container">
+        <h1 class="quiz-title">Quiz Application</h1>
+        <form id="quizForm">
+            <% questions.forEach((question, index) => { %>
+                <div class="question-block" id="question<%= index %>" data-correct="<%= question.correctAnswer %>">
+                    <h2 class="question-title">Question <%= index + 1 %>: <%- question.question %></h2>
+                    <% question.options.forEach((option, optionIndex) => { %>
+                        <div class="option">
+                            <input type="radio" id="q<%= index %>_<%= optionIndex %>" name="question<%= index %>" value="<%= option %>">
+                            <label for="q<%= index %>_<%= optionIndex %>"><%- option %></label>
+                        </div>
+                    <% }); %>
+                    <div class="navigation-buttons">
+                        <% if (index > 0) { %>
+                            <button type="button" class="back-button btn" data-index="<%= index %>">Back</button>
+                        <% } %>
+                        <% if (index < questions.length - 1) { %>
+                            <button type="button" class="next-button btn" data-index="<%= index %>">Next</button>
+                        <% } else { %>
+                            <button type="submit" class="btn">Submit Quiz</button>
+                        <% } %>
+                    </div>
+                </div>
+            <% }); %>
+        </form>
+
+        <!-- Modal for Score Display -->
+        <div id="scoreModal" class="modal">
+            <div class="modal-content">
+                <span class="close-button">&times;</span>
+                <h2>Your Score</h2>
+                <div id="scoreDisplay"></div>
+                <button id="reviewAnswers" class="btn">Review Answers</button>
+                <button id="retryQuiz" class="btn">Retry Quiz</button>
+                <a href="/" class="btn home-btn">Home</a> <!-- Home Button -->
+                <div id="detailedResults"></div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
