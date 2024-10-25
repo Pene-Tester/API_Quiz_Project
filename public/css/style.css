@@ -174,6 +174,7 @@ span{
     display: inline-block;
     padding: 1rem 2.8rem;
     background-color: black;
+    margin: 0.5rem; /* Add margin to separate the buttons */
     border-radius: 4rem;
     font-size: 1.6rem;
     color: #b74b4b;
@@ -525,4 +526,30 @@ span{
 .history-article:hover p {
     color: black;  /* Text turns black on hover */
     cursor: pointer;
+}
+
+/* Session Expired Page Styling */
+.session-expired-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: black;
+    color: white;
+    text-align: center;
+}
+
+.session-title {
+    font-size: 4rem;
+    color: #b74b4b;
+    margin-bottom: 2rem;
+    font-weight: 700;
+}
+
+.session-message {
+    font-size: 1.8rem;
+    color: #fff;
+    margin-bottom: 3rem;
+    max-width: 600px;
 }
