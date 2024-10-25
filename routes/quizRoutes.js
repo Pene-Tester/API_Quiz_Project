@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 const axios = require('axios');
+
+// Function to fetch quiz questions
 async function fetchQuestions(amount = 10, category = '', difficulty = '') {
     try {
         let url = `https://opentdb.com/api.php?amount=${amount}&type=multiple`;
@@ -23,11 +25,29 @@ async function fetchQuestions(amount = 10, category = '', difficulty = '') {
 router.get('/', (req, res) => {
     res.render('landing');
 });
-// Custom quiz route
+
+// Start the quiz route (initialize session)
 router.get('/custom', async (req, res) => {
     const { amount, category, difficulty } = req.query;
+    
+    // Fetch the questions
     const questions = await fetchQuestions(amount, category, difficulty);
+
+    // Initialize the quiz session
+    req.session.quizActive = true;
+    req.session.questions = questions;
+
+    // Render the quiz page
     res.render('quiz', { questions: questions });
+});
+
+// End the quiz session
+router.post('/end', (req, res) => {
+    // Set session to expire immediately
+    req.session.cookie.maxAge = 0;
+
+    // Redirect to a "Session Expired" page
+    res.render('sessionExpired'); // Render a special page that shows the session has ended
 });
 
 module.exports = router;

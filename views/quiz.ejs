@@ -42,7 +42,9 @@
                 <div id="scoreDisplay"></div>
                 <button id="reviewAnswers" class="btn">Review Answers</button>
                 <button id="retryQuiz" class="btn">Retry Quiz</button>
-                <a href="/" class="btn home-btn">Home</a> <!-- Home Button -->
+                <form action="/end" method="POST">
+                    <button type="submit" class="btn home-btn">End Quiz</button> <!-- End Quiz Button -->
+                </form>
                 <div id="detailedResults"></div>
             </div>
         </div>
